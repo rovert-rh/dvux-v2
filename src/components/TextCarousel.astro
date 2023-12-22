@@ -1,0 +1,55 @@
+<!-- components/TextCarousel.astro -->
+<div class="text-carousel">
+    <div class="text-container text-6xl">
+        <p id="carousel-text">Agencia Creativa DVUX</p>
+    </div>
+</div>
+
+<script>
+    let phrases = [
+        "Puedes crear tus ideas",
+        "Una landing page",
+        "Un E-commerce",
+        "Una aplicación",
+    ];
+    let currentIndex = 0;
+
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % phrases.length;
+        document.getElementById("carousel-text").innerText =
+            phrases[currentIndex];
+    }, 10000); // Change phrase every 8 seconds, adjust as needed
+</script>
+
+<style>
+    .text-carousel {
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 200px; /* Adjust the height as needed */
+        background-image: url('public/fondohorizontal.webp');
+
+    }
+
+    .text-container {
+        display: flex;
+        animation: marquee 10s linear infinite;
+    }
+
+    p {
+        margin: 0;
+        white-space: nowrap;
+        color: white;
+    }
+
+    @keyframes marquee {
+        from {
+            transform: translateX(100%);
+        }
+        to {
+            transform: translateX(-100%);
+        }
+    }
+</style>
