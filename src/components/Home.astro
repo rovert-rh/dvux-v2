@@ -1,6 +1,14 @@
-		---
-		const { id } = Astro.props
-		---
-		<section class="h-screen w-screen relative overflow-hidden  bg-cover bg-[url('public/fondo.webp')] bg-no-repeat lg:bg-cover lg:bg-center flex items-center justify-center" id={id}>
-			<h1 class=" w-full text-5xl text-center xl:text-right xl:mr-96 text-white md:text-9xl">AGENCIA <br>CREATIVA</h1>
-		</section>
+---
+const { id } = Astro.props;
+---
+
+<section
+  class="h-screen w-screen relative overflow-hidden bg-cover bg-[url('public/fondo.webp')] bg-no-repeat lg:bg-cover lg:bg-center flex items-center justify-center"
+  id={id}
+>
+  <h1
+    class="w-full text-5xl text-center xl:text-right xl:mr-96 text-white md:text-9xl"
+  >
+    AGENCIA <br />CREATIVA
+  </h1>
+</section>
