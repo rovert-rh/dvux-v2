@@ -1,5 +1,5 @@
 ---
-const { id } = Astro.props
+const { id } = Astro.props;
 ---
 
 <section class="bg-black text-white" id={id}>
@@ -9,10 +9,12 @@ const { id } = Astro.props
     </h1>
   </section>
   <section class="w-full flex justify-center">
-    <p class="pt-20 pl-10 pr-10 pb-10 text-center lg:text-lg lg:w-3/4 xl:text-xl xl:w-3/4 2xl:w-1/2">
-      En DVUX, la atención y satisfacción del cliente son nuestra máxima prioridad. 
-      Cada proyecto es una colaboración donde tus metas se convierten en las nuestras. 
-      Trabajamos incansablemente para lograr el éxito conjunto.
+    <p
+      class="pt-20 pl-10 pr-10 pb-10 text-center lg:text-lg lg:w-3/4 xl:text-xl xl:w-3/4 2xl:w-1/2"
+    >
+      En DVUX, la atención y satisfacción del cliente son nuestra máxima
+      prioridad. Cada proyecto es una colaboración donde tus metas se convierten
+      en las nuestras. Trabajamos incansablemente para lograr el éxito conjunto.
     </p>
   </section>
   <section class="flex flex-col justify-center items-center 2x:pt-10">
@@ -22,24 +24,43 @@ const { id } = Astro.props
   </section>
   <section class="w-full flex pt-16 justify-around items-center pb-10 xl:pb-20">
     <picture class="flex flex-col justify-center items-center">
-      <img  class="w-20 h-auto lg:w-24 lg:h-auto xl:w-24 xl:h-auto 2xl:w-auto 2xl:h-auto" src="public/branding.svg" alt="">
-      <span class="text-center lg:text-lg xl:text-xl lg:font-semibold pt-4">Branding</span>
+      <img
+        class="w-20 h-auto lg:w-24 lg:h-auto xl:w-24 xl:h-auto 2xl:w-auto 2xl:h-auto"
+        src="/branding.svg"
+        alt=""
+      />
+      <span class="text-center lg:text-lg xl:text-xl lg:font-semibold pt-4"
+        >Branding</span
+      >
     </picture>
     <picture class="flex flex-col justify-center items-center">
-      <img  class="w-20 h-auto lg:w-24 lg:h-auto xl:w-24 xl:h-auto 2xl:w-auto 2xl:h-auto" src="public/diseño.svg" alt="">
-      <span class="text-center lg:text-lg xl:text-xl lg:font-semibold pt-4">Diseño Web</span>
+      <img
+        class="w-20 h-auto lg:w-24 lg:h-auto xl:w-24 xl:h-auto 2xl:w-auto 2xl:h-auto"
+        src="/diseño.svg"
+        alt=""
+      />
+      <span class="text-center lg:text-lg xl:text-xl lg:font-semibold pt-4"
+        >Diseño Web</span
+      >
     </picture>
     <picture class="flex flex-col justify-center items-center">
-      <img  class="w-20 h-auto lg:w-24 lg:h-auto xl:w-24 xl:h-auto 2xl:w-auto 2xl:h-auto" src="public/desarrollo.svg" alt="">
-      <span class="text-center lg:text-lg xl:text-xl lg:font-semibold pt-4">Desarrollo Web</span>
+      <img
+        class="w-20 h-auto lg:w-24 lg:h-auto xl:w-24 xl:h-auto 2xl:w-auto 2xl:h-auto"
+        src="/desarrollo.svg"
+        alt=""
+      />
+      <span class="text-center lg:text-lg xl:text-xl lg:font-semibold pt-4"
+        >Desarrollo Web</span
+      >
     </picture>
   </section>
-  <div class="text-white w-full h-auto flex flex-col justify-center items-center text-center bg-[url('public/fondohorizontal.webp')] pl-10 pr-10 lg:text-lg xl:text-xl z-10">
+  <div
+    class="text-white w-full h-auto flex flex-col justify-center items-center text-center bg-[url('/fondohorizontal.webp')] pl-10 pr-10 lg:text-lg xl:text-xl z-10"
+  >
     <p class="pt-12 xl:pt-8">
-      “Sabemos que el tiempo es vital, por eso nuestros clientes siempre confían en nosotros”
+      “Sabemos que el tiempo es vital, por eso nuestros clientes siempre confían
+      en nosotros”
     </p>
-    <p class="pt-5 pb-6 text-[#EE738F] font-semibold">
-      DVUX
-    </p>
+    <p class="pt-5 pb-6 text-[#EE738F] font-semibold">DVUX</p>
   </div>
 </section>
