@@ -3,23 +3,23 @@ const { id } = Astro.props;
 ---
 
 <section class="bg-black text-white" id={id}>
-  
   <section class="container mx-auto flex flex-col lg:flex-row justify-center items-center space-y-8 lg:space-y-0 lg:space-x-8 py-12">
     <!-- Left Section with Text -->
     <div class="text-center lg:text-left lg:w-1/2">
       <h3 class="text-3xl mb-4 text-pretty font-extrabold ">
         Calidad que Inspira, Diseño que Conquista: Nuestra Confianza, Tu Éxito.
-      <h3/>
+      </h3>
       <p class="text-4xl m-0 font-semibold text-teal-600">
         DVUX
       </p>
     </div>
 
     <!-- Right Section with Images -->
-    <div class="grid grid-cols-2 gap-4 lg:gap-8 w-full lg:w-1/2">
-      <img class="w-full h-auto object-cover" src="/Boster.webp" alt="Image 1" />
-      <img class="w-full h-auto object-cover" src="/HYDRA.webp" alt="Image 2" />
-      <img class="w-full h-auto object-cover" src="/EZENCIAL.webp" alt="Image 3" />
+    <div class="grid grid-cols-2 gap-4 lg:gap-8 w-full lg:w-1/2 justify-center">
+      <img class="w-64 h-auto object-contain mx-auto" src="/Boster.webp" alt="Image 1" />
+      <img class="w-48 h-auto object-contain mx-auto" src="/HYDRA.webp" alt="Image 2" />
+      <img class="w-72 h-auto object-contain mx-auto" src="/EZENCIAL.webp" alt="Image 3" />
+      <img class="w-48 h-auto object-contain mx-auto" src="/simao.webp" alt="Image 4" />
     </div>
   </section>
 </section>
