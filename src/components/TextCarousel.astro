@@ -1,6 +1,6 @@
 <!-- components/TextCarousel.astro -->
 <div class="text-carousel">
-  <div class="text-container text-6xl">
+  <div class="text-container">
     <p id="carousel-text"></p>
   </div>
 </div>
@@ -65,8 +65,20 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 200px; /* Ajusta la altura según sea necesario */
+    height: 150px; /* Altura ajustable para dispositivos móviles */
     background-image: url("/fondohorizontal.webp");
+  }
+
+  @media (min-width: 768px) {
+    .text-carousel {
+      height: 200px; /* Mayor altura en tabletas y pantallas más grandes */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .text-carousel {
+      height: 250px; /* Altura aún mayor en pantallas grandes */
+    }
   }
 
   .text-container {
@@ -81,6 +93,33 @@
     border-right: 2px solid white; /* Cursor */
     padding-right: 5px;
     animation: blink-caret 0.75s step-end infinite; /* Parpadeo del cursor */
+    
+    /* Tamanos de texto adaptativos */
+    font-size: 1.5rem; /* Tamanio base para movil (equivalente a text-2xl) */
+  }
+
+  @media (min-width: 640px) {
+    #carousel-text {
+      font-size: 2rem; /* Tamanio de texto para pantallas medianas (sm: text-3xl) */
+    }
+  }
+
+  @media (min-width: 768px) {
+    #carousel-text {
+      font-size: 3rem; /* Tamanio de texto para tabletas (md: text-4xl) */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #carousel-text {
+      font-size: 4rem; /* Tamanio de texto para pantallas grandes (lg: text-5xl) */
+    }
+  }
+
+  @media (min-width: 1280px) {
+    #carousel-text {
+      font-size: 5rem; /* Tamanio de texto para pantallas muy grandes (xl: text-6xl) */
+    }
   }
 
   @keyframes blink-caret {
