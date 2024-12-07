@@ -1,14 +1,14 @@
----
-const { id } = Astro.props;
----
+  ---
+  const { id, title, subtitle } = Astro.props;
+  ---
 
-<section
-  class="h-screen w-screen relative overflow-hidden bg-cover bg-[url('/Banner.webp')] bg-no-repeat lg:bg-cover lg:bg-center flex items-center justify-center"
-  id={id}
->
-  <h1
-    class="w-full text-5xl text-center xl:text-right xl:mr-96 text-white md:text-9xl"
+  <section
+    class="h-screen w-screen relative overflow-hidden bg-cover bg-[url('/Navidad.webp')] bg-no-repeat lg:bg-cover lg:bg-center flex items-center justify-center"
+    id={id}
   >
-    AGENCIA <br />CREATIVA
-  </h1>
-</section>
+    <h1
+      class="w-full text-5xl text-center xl:text-right xl:mr-96 text-white md:text-9xl"
+    >
+    {title} <br /> {subtitle}
+    </h1>
+  </section>

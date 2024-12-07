@@ -1,0 +1,14 @@
+---
+// Card.astro
+const { title, cost, description, imageUrl, rating, previewLink, purchaseLink } = Astro.props;
+---
+
+<div class="card">
+  <img src={imageUrl} alt={title} class="card-image" />
+  <h3 class="card-title">{title}</h3>
+  <p class="card-description">{description}</p>
+  <p class="card-cost">${cost}</p>
+  <div class="card-rating">Rating: {rating}</div>
+  <a href={previewLink} class="preview-link">Preview</a>
+  <a href={purchaseLink} class="purchase-link">Buy Now</a>
+</div>

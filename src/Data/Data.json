@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "title": "Plantilla Corporativa",
+    "cost": "$20",
+    "description": "Ideal para sitios web de empresas.",
+    "imageUrl": "/ruta/a/la/imagen1.jpg",
+    "rating": "4.5",
+    "previewLink": "http://preview-link.com/corporativa",
+    "purchaseLink": "http://compra-link.com/corporativa"
+  },
+  {
+    "id": 2,
+    "title": "Plantilla Portafolio",
+    "cost": "$25",
+    "description": "Perfecta para mostrar trabajos y proyectos.",
+    "imageUrl": "/ruta/a/la/imagen2.jpg",
+    "rating": "4.7",
+    "previewLink": "http://preview-link.com/portafolio",
+    "purchaseLink": "http://compra-link.com/portafolio"
+  },
+  {
+    "id": 3,
+    "title": "Plantilla E-commerce",
+    "cost": "$30",
+    "description": "Diseñada para tiendas en línea y productos.",
+    "imageUrl": "/ruta/a/la/imagen3.jpg",
+    "rating": "4.8",
+    "previewLink": "http://preview-link.com/ecommerce",
+    "purchaseLink": "http://compra-link.com/ecommerce"
+  },
+  {
+    "id": 4,
+    "title": "Plantilla Blog Personal",
+    "cost": "$15",
+    "description": "Ideal para blogs y contenido personal.",
+    "imageUrl": "/ruta/a/la/imagen4.jpg",
+    "rating": "4.3",
+    "previewLink": "http://preview-link.com/blog",
+    "purchaseLink": "http://compra-link.com/blog"
+  },
+  {
+    "id": 5,
+    "title": "Plantilla Creativa",
+    "cost": "$22",
+    "description": "Diseño único para creativos y artistas.",
+    "imageUrl": "/ruta/a/la/imagen5.jpg",
+    "rating": "4.6",
+    "previewLink": "http://preview-link.com/creativa",
+    "purchaseLink": "http://compra-link.com/creativa"
+  },
+  {
+    "id": 6,
+    "title": "Plantilla Noticias",
+    "cost": "$18",
+    "description": "Para sitios de noticias y blogs informativos.",
+    "imageUrl": "/ruta/a/la/imagen6.jpg",
+    "rating": "4.4",
+    "previewLink": "http://preview-link.com/noticias",
+    "purchaseLink": "http://compra-link.com/noticias"
+  },
+  {
+    "id": 7,
+    "title": "Plantilla Agencia",
+    "cost": "$27",
+    "description": "Diseñada para agencias y empresas de servicios.",
+    "imageUrl": "/ruta/a/la/imagen7.jpg",
+    "rating": "4.9",
+    "previewLink": "http://preview-link.com/agencia",
+    "purchaseLink": "http://compra-link.com/agencia"
+  },
+  {
+    "id": 8,
+    "title": "Plantilla Landing Page",
+    "cost": "$12",
+    "description": "Una página de aterrizaje para productos o servicios.",
+    "imageUrl": "/ruta/a/la/imagen8.jpg",
+    "rating": "4.2",
+    "previewLink": "http://preview-link.com/landing",
+    "purchaseLink": "http://compra-link.com/landing"
+  },
+  {
+    "id": 9,
+    "title": "Plantilla Restaurantes",
+    "cost": "$20",
+    "description": "Ideal para sitios web de restaurantes y cafés.",
+    "imageUrl": "/ruta/a/la/imagen9.jpg",
+    "rating": "4.7",
+    "previewLink": "http://preview-link.com/restaurantes",
+    "purchaseLink": "http://compra-link.com/restaurantes"
+  }
+]
