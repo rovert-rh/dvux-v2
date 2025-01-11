@@ -3,12 +3,66 @@
 const { title, cost, description, imageUrl, rating, previewLink, purchaseLink } = Astro.props;
 ---
 
-<div class="card">
-  <img src={imageUrl} alt={title} class="card-image" />
-  <h3 class="card-title">{title}</h3>
-  <p class="card-description">{description}</p>
-  <p class="card-cost">${cost}</p>
-  <div class="card-rating">Rating: {rating}</div>
-  <a href={previewLink} class="preview-link">Preview</a>
-  <a href={purchaseLink} class="purchase-link">Buy Now</a>
+<div class="w-[24rem] h-[24rem] bg-white/20 rounded-lg shadow-md overflow-hidden">
+  <!-- Contenedor de la imagen -->
+  <div class="relative w-full h-[200px] group">
+    <!-- Imagen -->
+    <img src={imageUrl} alt={title} class="w-full h-full object-cover" />
+
+    <!-- Botones (ocultos por defecto) -->
+    <div
+      class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+    >
+      <a
+        href={previewLink}
+        class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded text-sm mx-2"
+      >
+        Preview
+      </a>
+      <a
+        href={purchaseLink}
+        class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded text-sm mx-2"
+      >
+        PROXIMAMENTE
+      </a>
+    </div>
+  </div>
+
+  <!-- Contenido -->
+  <div class="p-4">
+    <!-- Precio y Calificación -->
+    <div class="flex justify-between items-center mb-4">
+      <!-- Precio -->
+      <span class="bg-white/10 text-gray-900 text-sm font-semibold py-1 px-3 rounded">
+        ${cost}
+      </span>
+
+      <!-- Estrellas -->
+      <div class="flex items-center gap-1">
+        {[...Array(5)].map((_, index) => (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill={index < rating ? "currentColor" : "none"}
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            class={`w-5 h-5 ${index < rating ? "text-yellow-400" : "text-gray-300"}`}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+            />
+          </svg>
+        ))}
+      </div>
+    </div>
+
+    <!-- Nombre -->
+    <h3 class="text-lg font-bold text-white mb-2">{title}</h3>
+
+    <!-- Descripción -->
+    <p class="text-sm text-white">{description}</p>
+  </div>
 </div>
+|
