@@ -1,0 +1,37 @@
+---
+import Card from "./Card.astro";
+// Asumimos que tus datos están en esta ruta
+import templates from "../Data/Data.json";
+---
+
+<section class="w-full py-16 sm:py-24 bg-gray-900/50 backdrop-blur-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-extrabold text-white sm:text-5xl">
+                Explora Nuestras Plantillas
+            </h2>
+            <p class="mt-4 text-xl text-gray-300 max-w-2xl mx-auto">
+                Diseños listos para usar en tus proyectos. Modernos, responsivos
+                y fáciles de personalizar.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {
+                templates.map((template) => (
+                    <Card
+                        title={template.title}
+                        cost={template.cost}
+                        description={template.description}
+                        imageUrl={template.imageUrl}
+                        rating={template.rating}
+                        previewLink={template.previewLink}
+                        purchaseLink={template.purchaseLink}
+                    />
+                ))
+            }
+        </div>
+
+        <div class="text-center mt-16"></div>
+    </div>
+</section>

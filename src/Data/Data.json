@@ -2,13 +2,45 @@
   {
     "id": 1,
     "title": "Plantilla Agencia",
-    "cost": "USD",
+    "cost": 45.00,
     "description": "Una plantilla moderna para tu agencia",
-    "imageUrl": "https://res.cloudinary.com/dxaedigac/image/upload/v1736584544/Thum/Thum_Agencia.png",
+    "imageUrl": "https://res.cloudinary.com/dxaedigac/image/upload/v1751512149/Plant4_zu1zc3.png",
     "rating": 4.5,
     "category": "Plantillas Web",
     "previewLink": "https://demo-plantilla.netlify.app/",
     "purchaseLink": "#"
+  },
+  {
+    "id": 2,
+    "title": "Plantilla Landing Page",
+    "cost": 45.00,
+    "description": "Una plantilla moderna para una lading page",
+    "imageUrl": "https://res.cloudinary.com/dxaedigac/image/upload/v1751512149/Plant1_oaxk48.png",
+    "rating": 4.5,
+    "category": "Plantillas Web",
+    "previewLink": "https://plantilla-1-dvux.netlify.app",
+    "purchaseLink": "#"
+  },
+  {
+    "id": 3,
+    "title": "Plantilla Landing Page",
+    "cost": 45.00,
+    "description": "Una plantilla moderna para una lading page",
+    "imageUrl": "https://res.cloudinary.com/dxaedigac/image/upload/v1751512149/Plant2_nq2lnr.png",
+    "rating": 4.5,
+    "category": "Plantillas Web",
+    "previewLink": "https://plantilla-2-dvux.netlify.app",
+    "purchaseLink": "#"
+  },
+  {
+    "id": 4,
+    "title": "Plantilla Landing Page",
+    "cost": 45.00,
+    "description": "Una plantilla moderna para una lading page",
+    "imageUrl": "https://res.cloudinary.com/dxaedigac/image/upload/v1751512149/Plant3_i1kibd.png",
+    "rating": 4.5,
+    "category": "Plantillas Web",
+    "previewLink": "https://plantilla-3-dvux.netlify.app",
+    "purchaseLink": "#"
   }
-  
 ]
