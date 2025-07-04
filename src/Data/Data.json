@@ -2,45 +2,45 @@
   {
     "id": 1,
     "title": "Plantilla Agencia",
-    "cost": 45.00,
+    "cost": 39.99,
     "description": "Una plantilla moderna para tu agencia",
     "imageUrl": "https://res.cloudinary.com/dxaedigac/image/upload/v1751512149/Plant4_zu1zc3.png",
     "rating": 4.5,
     "category": "Plantillas Web",
     "previewLink": "https://demo-plantilla.netlify.app/",
-    "purchaseLink": "#"
+    "purchaseLink": "https://wa.me/593984850656?text=Me%20interesa%20la%20plantilla#agencia"
   },
   {
     "id": 2,
     "title": "Plantilla Landing Page",
-    "cost": 45.00,
+    "cost": 69.99,
     "description": "Una plantilla moderna para una lading page",
-    "imageUrl": "https://res.cloudinary.com/dxaedigac/image/upload/v1751512149/Plant1_oaxk48.png",
+    "imageUrl": "https://res.cloudinary.com/dxaedigac/image/upload/v1751610620/Plantilla1_qvvxro.png",
     "rating": 4.5,
     "category": "Plantillas Web",
     "previewLink": "https://plantilla-1-dvux.netlify.app",
-    "purchaseLink": "#"
+    "purchaseLink": "https://wa.me/593984850656?text=Me%20interesa%20la%20plantilla#1"
   },
   {
     "id": 3,
     "title": "Plantilla Landing Page",
-    "cost": 45.00,
+    "cost": 59.99,
     "description": "Una plantilla moderna para una lading page",
-    "imageUrl": "https://res.cloudinary.com/dxaedigac/image/upload/v1751512149/Plant2_nq2lnr.png",
+    "imageUrl": "https://res.cloudinary.com/dxaedigac/image/upload/v1751610620/Plantilla2_tf9nfu.png",
     "rating": 4.5,
     "category": "Plantillas Web",
     "previewLink": "https://plantilla-2-dvux.netlify.app",
-    "purchaseLink": "#"
+    "purchaseLink": "https://wa.me/593984850656?text=Me%20interesa%20la%20plantilla#2"
   },
   {
     "id": 4,
     "title": "Plantilla Landing Page",
-    "cost": 45.00,
+    "cost": 69.99,
     "description": "Una plantilla moderna para una lading page",
-    "imageUrl": "https://res.cloudinary.com/dxaedigac/image/upload/v1751512149/Plant3_i1kibd.png",
+    "imageUrl": "https://res.cloudinary.com/dxaedigac/image/upload/v1751610620/Plantilla3_fxclux.png",
     "rating": 4.5,
     "category": "Plantillas Web",
     "previewLink": "https://plantilla-3-dvux.netlify.app",
-    "purchaseLink": "#"
+    "purchaseLink": "https://wa.me/593984850656?text=Me%20interesa%20la%20plantilla#3"
   }
 ]

@@ -1,9 +1,6 @@
 ---
-// Importaciones
 import Card from "./Card.astro";
 import allData from "../Data/Data.json";
-
-// --- LÓGICA DEL SERVIDOR (Solo para el renderizado inicial) ---
 
 const categories = ["Todos", ...new Set(allData.map((item) => item.category))];
 const itemsPerPage = 6;
