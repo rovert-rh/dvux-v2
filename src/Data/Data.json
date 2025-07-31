@@ -8,7 +8,7 @@
     "rating": 4.5,
     "category": "Plantillas Web",
     "previewLink": "https://demo-plantilla.netlify.app/",
-    "purchaseLink": "https://wa.me/593984850656?text=Me%20interesa%20la%20plantilla#agencia"
+    "purchaseLink": "https://dvuxlat.gumroad.com/l/creative_agencytemplate"
   },
   {
     "id": 2,
@@ -19,7 +19,7 @@
     "rating": 4.5,
     "category": "Plantillas Web",
     "previewLink": "https://plantilla-1-dvux.netlify.app",
-    "purchaseLink": "https://wa.me/593984850656?text=Me%20interesa%20la%20plantilla#1"
+    "purchaseLink": "https://dvuxlat.gumroad.com/l/template_landingpage"
   },
   {
     "id": 3,
@@ -30,7 +30,7 @@
     "rating": 4.5,
     "category": "Plantillas Web",
     "previewLink": "https://plantilla-2-dvux.netlify.app",
-    "purchaseLink": "https://wa.me/593984850656?text=Me%20interesa%20la%20plantilla#2"
+    "purchaseLink": "https://dvuxlat.gumroad.com/l/t_landingpage_compact"
   },
   {
     "id": 4,
@@ -41,6 +41,17 @@
     "rating": 4.5,
     "category": "Plantillas Web",
     "previewLink": "https://plantilla-3-dvux.netlify.app",
-    "purchaseLink": "https://wa.me/593984850656?text=Me%20interesa%20la%20plantilla#3"
+    "purchaseLink": "https://dvuxlat.gumroad.com/l/t_landingpage_dynamic"
+  },
+  {
+    "id": 5,
+    "title": "Plantilla Landing Page",
+    "cost": 99.99,
+    "description": "Una plantilla moderna para una lading tecnologica.",
+    "imageUrl": "https://res.cloudinary.com/dxaedigac/image/upload/v1753947115/webpage_nvgrar.png",
+    "rating": 4.5,
+    "category": "Plantillas Web",
+    "previewLink": "https://plantilla-v4.netlify.app",
+    "purchaseLink": "https://dvuxlat.gumroad.com/l/template_astro"
   }
 ]
