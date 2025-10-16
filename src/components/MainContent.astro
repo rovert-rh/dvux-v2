@@ -1,0 +1,222 @@
+---
+import promptsData from "../Data/Prompts.json";
+import PromptCard from "./PromptCard.astro";
+import FilterBar from "./FilterBar.astro";
+
+interface Prompt {
+    case_number: number;
+    title: string;
+    creator: {
+        name: string;
+        link: string;
+    } | null;
+    prompt: string;
+    category: string;
+}
+
+const allPrompts: Prompt[] = promptsData;
+
+const itemsPerPage = 12;
+const totalPages = Math.ceil(allPrompts.length / itemsPerPage);
+
+const allCategories = [...new Set(allPrompts.map((prompt) => prompt.category))];
+const sortedCategories = allCategories.sort();
+---
+
+<section class="w-full py-16 pt-32 sm:py-20 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-[#E6E6E6]">
+                🧠 Directorio de Prompts
+            </h1>
+            <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+                Encuentra la inspiración que necesitas para tus proyectos
+                creativos.
+            </p>
+        </div>
+
+        <FilterBar categories={sortedCategories} />
+
+        <div
+            id="prompt-grid"
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 transition-all"
+        >
+            {
+                allPrompts.map((prompt) => (
+                    <PromptCard
+                        case_number={prompt.case_number}
+                        title={prompt.title}
+                        prompt={prompt.prompt}
+                        category={prompt.category}
+                        creator={prompt.creator}
+                    />
+                ))
+            }
+        </div>
+
+        <div
+            id="pagination-container"
+            class="flex flex-wrap justify-center mt-10 space-x-2"
+        >
+            {
+                Array.from({ length: totalPages }, (_, index) => (
+                    <button
+                        type="button"
+                        class:list={[
+                            "px-4 py-2 rounded-lg font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-black",
+                            index === 0
+                                ? "bg-[#41B6A1] text-white"
+                                : "bg-gray-700 text-gray-300 hover:bg-gray-600",
+                        ]}
+                        data-page={index + 1}
+                    >
+                        {index + 1}
+                    </button>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<div
+    id="toast"
+    class="fixed bottom-6 right-6 bg-[#41B6A1] text-white px-4 py-2 rounded-lg shadow-lg opacity-0 pointer-events-none transition-opacity duration-500"
+>
+    ¡Prompt copiado!
+</div>
+
+<script define:vars={{ allPrompts, itemsPerPage }}>
+    const searchInput = document.getElementById("search-input");
+    const categorySelect = document.getElementById("category-select");
+    const promptGrid = document.getElementById("prompt-grid");
+    const allCards = promptGrid.querySelectorAll(".prompt-card");
+    const toast = document.getElementById("toast");
+    const paginationContainer = document.getElementById("pagination-container");
+
+    let currentPage = 1;
+
+    const normalizeText = (text) =>
+        text
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "");
+
+    function showToast() {
+        toast.style.opacity = "1";
+        toast.style.pointerEvents = "auto";
+        setTimeout(() => (toast.style.opacity = "0"), 1500);
+    }
+
+    window.copyPrompt = (button) => {
+        const promptText = button.dataset.prompt;
+        navigator.clipboard.writeText(promptText).then(() => {
+            showToast();
+        });
+    };
+
+    function updateCardVisibility() {
+        const searchTerm = normalizeText(searchInput.value.trim());
+        const selectedCategory = categorySelect.value;
+
+        const filteredCards = Array.from(allCards).filter((card) => {
+            const title = normalizeText(card.dataset.title);
+            const category = card.dataset.category;
+            const matchesSearch = title.includes(searchTerm);
+            const matchesCategory =
+                selectedCategory === "all" || category === selectedCategory;
+            return matchesSearch && matchesCategory;
+        });
+
+        const totalFilteredPages = Math.ceil(
+            filteredCards.length / itemsPerPage,
+        );
+
+        paginationContainer.innerHTML = "";
+        if (totalFilteredPages > 1) {
+            for (let i = 1; i <= totalFilteredPages; i++) {
+                const button = document.createElement("button");
+                button.type = "button";
+                button.classList.add(
+                    "px-4",
+                    "py-2",
+                    "rounded-lg",
+                    "font-medium",
+                    "transition-colors",
+                    "duration-200",
+                    "focus:outline-none",
+                    "focus-visible:ring-2",
+                    "focus-visible:ring-offset-2",
+                    "focus-visible:ring-offset-black",
+                    "bg-gray-700",
+                    "text-gray-300",
+                    "hover:bg-gray-600",
+                );
+                button.dataset.page = i;
+                button.textContent = i;
+                paginationContainer.appendChild(button);
+            }
+        }
+
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+
+        allCards.forEach((card) => (card.style.display = "none"));
+
+        filteredCards.slice(startIndex, endIndex).forEach((card) => {
+            card.style.display = "flex";
+        });
+
+        updatePaginationButtons();
+    }
+
+    function updatePaginationButtons() {
+        const buttons = paginationContainer.querySelectorAll("button");
+        buttons.forEach((button) => {
+            const page = parseInt(button.dataset.page, 10);
+            if (page === currentPage) {
+                button.classList.add("bg-[#41B6A1]", "text-white");
+                button.classList.remove(
+                    "bg-gray-700",
+                    "text-gray-300",
+                    "hover:bg-gray-600",
+                );
+            } else {
+                button.classList.add(
+                    "bg-gray-700",
+                    "text-gray-300",
+                    "hover:bg-gray-600",
+                );
+                button.classList.remove("bg-[#41B6A1]", "text-white");
+            }
+        });
+    }
+
+    searchInput.addEventListener("input", () => {
+        currentPage = 1;
+        updateCardVisibility();
+    });
+
+    categorySelect.addEventListener("change", () => {
+        currentPage = 1;
+        updateCardVisibility();
+    });
+
+    paginationContainer.addEventListener("click", (e) => {
+        const button = e.target.closest("button");
+        if (button) {
+            const newPage = parseInt(button.dataset.page, 10);
+            if (newPage !== currentPage) {
+                currentPage = newPage;
+                updateCardVisibility();
+            }
+        }
+    });
+
+    allCards.forEach((card, index) => {
+        const prompt = allPrompts[index];
+        card.dataset.title = prompt.title;
+        card.dataset.category = prompt.category;
+    });
+
+    updateCardVisibility();
+</script>
