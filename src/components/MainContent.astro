@@ -65,7 +65,7 @@ const sortedCategories = allCategories.sort();
                         class:list={[
                             "px-4 py-2 rounded-lg font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-black",
                             index === 0
-                                ? "bg-[#41B6A1] text-white"
+                                ? "bg-[#EE738F] text-white"
                                 : "bg-gray-700 text-gray-300 hover:bg-gray-600",
                         ]}
                         data-page={index + 1}
@@ -174,7 +174,7 @@ const sortedCategories = allCategories.sort();
         buttons.forEach((button) => {
             const page = parseInt(button.dataset.page, 10);
             if (page === currentPage) {
-                button.classList.add("bg-[#41B6A1]", "text-white");
+                button.classList.add("bg-[#EE738F]", "text-white");
                 button.classList.remove(
                     "bg-gray-700",
                     "text-gray-300",
@@ -186,7 +186,7 @@ const sortedCategories = allCategories.sort();
                     "text-gray-300",
                     "hover:bg-gray-600",
                 );
-                button.classList.remove("bg-[#41B6A1]", "text-white");
+                button.classList.remove("bg-[#EE738F]", "text-white");
             }
         });
     }
