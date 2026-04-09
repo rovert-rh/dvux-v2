@@ -1,163 +1,121 @@
+---
+const navLinks = [
+  { href: "/#inicio", label: "Inicio" },
+  { href: "/#servicios", label: "Servicios" },
+  { href: "/#portafolio", label: "Portafolio" },
+  { href: "/#proceso", label: "Proceso" },
+  { href: "/catalogo", label: "Catalogo" },
+];
+---
+
 <header
-  class="flex w-screen justify-between items-center px-1 lg:px-6 lg: bg-transparent fixed top-0 z-50 backdrop-blur-[2px]"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+  id="navbar"
 >
-  <div class="pl-4 lg:pl-5 lg:flex lg:basis-1/5">
-    <img class="w-1/2 lg:w-auto" src="/logo.webp" alt="" />
-  </div>
-  <nav class="lg:w-full">
-    <div class="lg:hidden pr-2 flex justify-end" id="mobile-menu-icon">
-      <svg
-        width="54"
-        height="23"
-        viewBox="0 0 24 13"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <rect
-          x="0.9375"
-          y="0.963867"
-          width="23.1706"
-          height="2.84239"
-          fill="#41B6A1"></rect>
-        <rect
-          x="0.9375"
-          y="5.51172"
-          width="23.1706"
-          height="2.84239"
-          fill="#41B6A1"></rect>
-        <rect
-          x="0.9375"
-          y="10.0596"
-          width="23.1706"
-          height="2.84239"
-          fill="#41B6A1"></rect>
-      </svg>
-    </div>
-    <div>
-      <div
-        class="lg:hidden w-screen h-auto bg-black absolute top-0 left-0 hidden"
-        id="mobile-menu"
-      >
-        <div
-          class="lg:hidden pr-2 pt-5 flex justify-end"
-          id="mobile-menu-icon-close"
+  <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-16 lg:h-20">
+    <!-- Logo -->
+    <a href="/" class="flex-shrink-0">
+      <img class="h-8 lg:h-10 w-auto" src="/logo.webp" alt="DVUX" />
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden lg:flex items-center gap-8">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="text-[#A1A1AA] text-sm font-medium hover:text-[#F4F4F5] transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-[#41B6A1] after:transition-all hover:after:w-full"
         >
-          <svg
-            width="54"
-            height="23"
-            viewBox="0 0 24 13"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect
-              x="0.9375"
-              y="0.963867"
-              width="23.1706"
-              height="2.84239"
-              fill="#41B6A1"></rect>
-            <rect
-              x="0.9375"
-              y="5.51172"
-              width="23.1706"
-              height="2.84239"
-              fill="#41B6A1"></rect>
-            <rect
-              x="0.9375"
-              y="10.0596"
-              width="23.1706"
-              height="2.84239"
-              fill="#41B6A1"></rect>
-          </svg>
-        </div>
-        <ul class="w-full flex flex-col">
-          <li class="flex">
-            <a class="text-white mt-5 ml-5 mb-2 flex-grow" href="/#inicio"
-              >INICIO</a
-            >
-          </li>
-          <li class="flex">
-            <a class="text-white mt-5 ml-5 mb-2 flex-grow" href="#servicios"
-              >SERVICIOS</a
-            >
-          </li>
-          <li class="flex">
-            <a class="text-white mt-5 ml-5 mb-2 flex-grow" href="#proyectos"
-              >PROYECTOS</a
-            >
-          </li>
-          <li class="flex">
-            <a class="text-white mt-5 ml-5 mb-2 flex-grow" href="#quienes-somos"
-              >¿QUIÉNES SOMOS?</a
-            >
-          </li>
-          <li class="flex">
-            <a class="text-white mt-5 ml-5 mb-2 flex-grow" href="/catalogo"
-              >CATALOGO</a
-            >
-          </li>
-          <li class="flex">
-            <a class="text-white mt-5 ml-5 mb-2 flex-grow" href="/prompts"
-              >PROMPTS</a
-            >
-          </li>
-          <li class="flex">
-            <a class="text-white mt-5 ml-5 mb-5 flex-grow" href="#contacto"
-              >CONTACTO</a
-            >
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div
-      class="hidden lg:w-full lg:flex lg:justify-end lg:text-white lg:shrink-0"
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Desktop CTA -->
+    <a
+      href="#contacto"
+      class="hidden lg:inline-flex items-center gap-2 bg-[#41B6A1] text-[#0a0b10] text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-[#34927b] transition-colors btn-glow"
     >
-      <ul class="lg:flex lg:gap-28 lg:items-center shrink lg:cursor-pointer">
-        <li class="lg:hover:border-b-2">
-          <a href="/#inicio">INICIO</a>
-        </li>
-        <li class="lg:hover:border-b-2">
-          <a href="/#servicios">SERVICIOS</a>
-        </li>
-        <li class="lg:hover:border-b-2">
-          <a href="/#proyectos">PROYECTOS</a>
-        </li>
-        <li class="lg:hover:border-b-2">
-          <a href="/#quienes-somos">¿QUIÉNES SOMOS?</a>
-        </li>
-        <li class="lg:hover:border-b-2">
-          <a href="/catalogo">CATALOGO</a>
-        </li>
-        <li class="lg:hover:border-b-2">
-          <a href="/prompts">PROMPTS</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+      Contacto
+    </a>
+
+    <!-- Mobile hamburger -->
+    <button
+      class="lg:hidden flex flex-col gap-1.5 p-2"
+      id="mobile-menu-icon"
+      aria-label="Abrir menu"
+    >
+      <span class="block w-6 h-0.5 bg-[#41B6A1] transition-all origin-center" id="bar1"></span>
+      <span class="block w-6 h-0.5 bg-[#41B6A1] transition-all" id="bar2"></span>
+      <span class="block w-6 h-0.5 bg-[#41B6A1] transition-all origin-center" id="bar3"></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
   <div
-    class="hidden lg:flex lg:basis-1/4 lg:justify-center lg:py-4 lg:px-8 lg:text-xs lg:font-bold"
+    class="lg:hidden fixed inset-0 bg-[#0a0b10]/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300"
+    id="mobile-menu"
   >
-    <a href="#contacto" class="lg:bg-white lg:py-3 lg:px-5"> CONTACTO</a>
+    <button
+      class="absolute top-5 right-6 text-[#A1A1AA] hover:text-white p-2"
+      id="mobile-menu-close"
+      aria-label="Cerrar menu"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    {navLinks.map((link) => (
+      <a
+        href={link.href}
+        class="mobile-link text-[#F4F4F5] text-2xl font-semibold hover:text-[#41B6A1] transition-colors"
+      >
+        {link.label}
+      </a>
+    ))}
+
+    <a
+      href="#contacto"
+      class="mobile-link mt-4 bg-[#41B6A1] text-[#0a0b10] font-semibold px-8 py-3 rounded-lg text-lg hover:bg-[#34927b] transition-colors"
+    >
+      Contacto
+    </a>
   </div>
 </header>
 
 <script>
-  const menuIcon = document.querySelector("#mobile-menu-icon");
-  const menuIconClose = document.querySelector("#mobile-menu-icon-close");
-  const mobileMenu = document.querySelector("#mobile-menu");
+  const navbar = document.getElementById("navbar");
+  const menuIcon = document.getElementById("mobile-menu-icon");
+  const menuClose = document.getElementById("mobile-menu-close");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const mobileLinks = document.querySelectorAll(".mobile-link");
 
-  if (menuIcon) {
-    menuIcon.addEventListener("click", () => {
-      if (mobileMenu) {
-        mobileMenu.classList.toggle("hidden");
+  // Scroll effect - add glass bg on scroll
+  window.addEventListener("scroll", () => {
+    if (navbar) {
+      if (window.scrollY > 50) {
+        navbar.classList.add("bg-[#0a0b10]/80", "backdrop-blur-xl", "border-b", "border-white/[0.06]");
+      } else {
+        navbar.classList.remove("bg-[#0a0b10]/80", "backdrop-blur-xl", "border-b", "border-white/[0.06]");
       }
-    });
+    }
+  });
+
+  function openMenu() {
+    if (mobileMenu) {
+      mobileMenu.classList.remove("opacity-0", "pointer-events-none");
+      mobileMenu.classList.add("opacity-100", "pointer-events-auto");
+      document.body.style.overflow = "hidden";
+    }
   }
 
-  if (menuIconClose) {
-    menuIconClose.addEventListener("click", () => {
-      if (mobileMenu) {
-        mobileMenu.classList.toggle("hidden");
-      }
-    });
+  function closeMenu() {
+    if (mobileMenu) {
+      mobileMenu.classList.add("opacity-0", "pointer-events-none");
+      mobileMenu.classList.remove("opacity-100", "pointer-events-auto");
+      document.body.style.overflow = "";
+    }
   }
+
+  menuIcon?.addEventListener("click", openMenu);
+  menuClose?.addEventListener("click", closeMenu);
+  mobileLinks.forEach((link) => link.addEventListener("click", closeMenu));
 </script>

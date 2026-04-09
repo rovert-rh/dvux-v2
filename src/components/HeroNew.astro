@@ -1,0 +1,435 @@
+---
+interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props;
+---
+
+<section id={id} class="relative min-h-screen flex items-center justify-center overflow-hidden bg-dot-pattern">
+  <!-- Gradient mesh orbs -->
+  <div class="glow-teal" style="top: -200px; right: -100px;"></div>
+  <div class="glow-pink" style="bottom: -150px; left: -100px;"></div>
+
+  <!-- Animated Globe Background -->
+  <canvas id="globe-canvas" class="absolute inset-0 w-full h-full pointer-events-none" style="opacity: 0.5;"></canvas>
+
+  <div class="relative z-10 max-w-5xl mx-auto px-6 text-center py-32">
+    <!-- Badge -->
+    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-sm mb-8">
+      <span class="w-2 h-2 rounded-full bg-[#41B6A1] animate-pulse"></span>
+      <span class="text-sm text-[#A1A1AA]">Proyectos entregados con exito</span>
+    </div>
+
+    <!-- Main heading -->
+    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6">
+      Tu landing profesional
+      <br />
+      <span class="text-[#41B6A1]">lista en 7 dias</span>
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="text-lg md:text-xl text-[#A1A1AA] max-w-2xl mx-auto mb-10 leading-relaxed">
+      Ayudamos a freelancers y creativos a conseguir clientes con landings
+      optimizadas para convertir. Diseno + copy + desarrollo.
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <a
+        href="#contacto"
+        class="btn-glow inline-flex items-center gap-2 bg-[#41B6A1] text-[#0a0b10] font-semibold px-8 py-4 rounded-lg text-base hover:bg-[#34927b] transition-colors"
+      >
+        Agenda tu llamada gratis
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <a
+        href="#portafolio"
+        class="inline-flex items-center gap-2 border border-white/10 text-white font-medium px-8 py-4 rounded-lg text-base hover:border-[#41B6A1]/30 hover:bg-white/[0.02] transition-all"
+      >
+        Ver portafolio
+      </a>
+    </div>
+
+    <!-- Social proof mini -->
+    <div class="mt-16 flex flex-col sm:flex-row items-center justify-center gap-6 text-[#71717A] text-sm">
+      <div class="flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#41B6A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <span>Entrega en 7 dias</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#41B6A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <span>Diseno + copy incluido</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#41B6A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <span>Precio fijo, sin sorpresas</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom gradient fade -->
+  <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a0b10] to-transparent"></div>
+</section>
+
+<script>
+  const canvas = document.getElementById("globe-canvas") as HTMLCanvasElement;
+  const ctx = canvas.getContext("2d")!;
+
+  let width: number, height: number, dpr: number;
+  let animationId: number;
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const rect = canvas.parentElement!.getBoundingClientRect();
+    width = rect.width;
+    height = rect.height;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  resize();
+  window.addEventListener("resize", resize);
+
+  // 3D projection helpers
+  const TEAL = { r: 65, g: 182, b: 161 };
+  const PURPLE = { r: 160, g: 80, b: 220 };
+
+  function project(x: number, y: number, z: number, cx: number, cy: number, radius: number) {
+    const scale = 800 / (800 + z);
+    return {
+      x: cx + x * scale,
+      y: cy + y * scale,
+      scale,
+      z
+    };
+  }
+
+  function rotateY(x: number, y: number, z: number, angle: number) {
+    const cos = Math.cos(angle);
+    const sin = Math.sin(angle);
+    return {
+      x: x * cos - z * sin,
+      y,
+      z: x * sin + z * cos
+    };
+  }
+
+  function rotateX(x: number, y: number, z: number, angle: number) {
+    const cos = Math.cos(angle);
+    const sin = Math.sin(angle);
+    return {
+      x,
+      y: y * cos - z * sin,
+      z: y * sin + z * cos
+    };
+  }
+
+  // Generate sphere wireframe points
+  const latLines = 12;
+  const lonLines = 18;
+  const segments = 60;
+
+  // Floating particles around the globe
+  const particles: { lat: number; lon: number; speed: number; size: number; phase: number }[] = [];
+  for (let i = 0; i < 50; i++) {
+    particles.push({
+      lat: (Math.random() - 0.5) * Math.PI,
+      lon: Math.random() * Math.PI * 2,
+      speed: 0.002 + Math.random() * 0.005,
+      size: 1 + Math.random() * 2,
+      phase: Math.random() * Math.PI * 2,
+    });
+  }
+
+  // Ring particles (orbiting ring at the base)
+  const ringParticles: { angle: number; speed: number; size: number; dist: number }[] = [];
+  for (let i = 0; i < 30; i++) {
+    ringParticles.push({
+      angle: Math.random() * Math.PI * 2,
+      speed: 0.008 + Math.random() * 0.012,
+      size: 1 + Math.random() * 1.5,
+      dist: 0.95 + Math.random() * 0.15,
+    });
+  }
+
+  let time = 0;
+
+  function drawGlobe() {
+    ctx.clearRect(0, 0, width, height);
+    time += 0.004;
+
+    const cx = width / 2;
+    const cy = height / 2;
+    const radius = Math.min(width, height) * 0.45;
+    const tiltX = -0.3; // tilt the globe slightly
+    const rotY = time; // auto-rotation
+
+    // Draw layered glow behind globe — blue/teal core fading to pink edges
+    // Layer 1: large pink/rose outer halo
+    const glowPink = ctx.createRadialGradient(cx, cy, radius * 0.6, cx, cy, radius * 2.5);
+    glowPink.addColorStop(0, "rgba(238, 115, 160, 0.0)");
+    glowPink.addColorStop(0.35, "rgba(238, 115, 143, 0.07)");
+    glowPink.addColorStop(0.6, "rgba(200, 80, 140, 0.1)");
+    glowPink.addColorStop(0.85, "rgba(180, 60, 120, 0.04)");
+    glowPink.addColorStop(1, "rgba(0, 0, 0, 0)");
+    ctx.fillStyle = glowPink;
+    ctx.fillRect(0, 0, width, height);
+
+    // Layer 2: mid purple transition
+    const glowPurple = ctx.createRadialGradient(cx, cy, radius * 0.3, cx, cy, radius * 1.8);
+    glowPurple.addColorStop(0, "rgba(120, 60, 220, 0.0)");
+    glowPurple.addColorStop(0.3, "rgba(140, 70, 220, 0.08)");
+    glowPurple.addColorStop(0.6, "rgba(180, 80, 180, 0.06)");
+    glowPurple.addColorStop(1, "rgba(0, 0, 0, 0)");
+    ctx.fillStyle = glowPurple;
+    ctx.fillRect(0, 0, width, height);
+
+    // Layer 3: teal/blue inner core glow
+    const glowTeal = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius * 1.3);
+    glowTeal.addColorStop(0, "rgba(65, 182, 161, 0.12)");
+    glowTeal.addColorStop(0.3, "rgba(50, 140, 180, 0.1)");
+    glowTeal.addColorStop(0.6, "rgba(80, 100, 200, 0.06)");
+    glowTeal.addColorStop(1, "rgba(0, 0, 0, 0)");
+    ctx.fillStyle = glowTeal;
+    ctx.fillRect(0, 0, width, height);
+
+    // Layer 4: sharp edge glow ring right at the sphere surface
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius * 1.02, 0, Math.PI * 2);
+    const edgeGlow = ctx.createRadialGradient(cx, cy, radius * 0.85, cx, cy, radius * 1.35);
+    edgeGlow.addColorStop(0, "rgba(65, 182, 161, 0.0)");
+    edgeGlow.addColorStop(0.4, "rgba(100, 140, 220, 0.1)");
+    edgeGlow.addColorStop(0.7, "rgba(200, 100, 180, 0.08)");
+    edgeGlow.addColorStop(1, "rgba(0, 0, 0, 0)");
+    ctx.fillStyle = edgeGlow;
+    ctx.fill();
+
+    // Draw latitude lines
+    for (let i = 0; i <= latLines; i++) {
+      const lat = (i / latLines) * Math.PI - Math.PI / 2;
+      ctx.beginPath();
+      let started = false;
+
+      for (let j = 0; j <= segments; j++) {
+        const lon = (j / segments) * Math.PI * 2;
+        const x0 = radius * Math.cos(lat) * Math.cos(lon);
+        const y0 = radius * Math.sin(lat);
+        const z0 = radius * Math.cos(lat) * Math.sin(lon);
+
+        const r1 = rotateY(x0, y0, z0, rotY);
+        const r2 = rotateX(r1.x, r1.y, r1.z, tiltX);
+        const p = project(r2.x, r2.y, r2.z, cx, cy, radius);
+
+        // Fade lines based on depth
+        if (j === 0 || !started) {
+          ctx.moveTo(p.x, p.y);
+          started = true;
+        } else {
+          ctx.lineTo(p.x, p.y);
+        }
+      }
+
+      const alpha = 0.15 + 0.1 * Math.sin(lat * 3 + time * 2);
+      ctx.strokeStyle = `rgba(65, 182, 161, ${alpha})`;
+      ctx.lineWidth = 0.6;
+      ctx.stroke();
+    }
+
+    // Draw longitude lines
+    for (let i = 0; i < lonLines; i++) {
+      const lon = (i / lonLines) * Math.PI * 2;
+      ctx.beginPath();
+      let started = false;
+
+      for (let j = 0; j <= segments; j++) {
+        const lat = (j / segments) * Math.PI - Math.PI / 2;
+        const x0 = radius * Math.cos(lat) * Math.cos(lon);
+        const y0 = radius * Math.sin(lat);
+        const z0 = radius * Math.cos(lat) * Math.sin(lon);
+
+        const r1 = rotateY(x0, y0, z0, rotY);
+        const r2 = rotateX(r1.x, r1.y, r1.z, tiltX);
+        const p = project(r2.x, r2.y, r2.z, cx, cy, radius);
+
+        if (j === 0 || !started) {
+          ctx.moveTo(p.x, p.y);
+          started = true;
+        } else {
+          ctx.lineTo(p.x, p.y);
+        }
+      }
+
+      const alpha = 0.12 + 0.08 * Math.cos(lon * 2 + time * 1.5);
+      ctx.strokeStyle = `rgba(120, 60, 200, ${alpha})`;
+      ctx.lineWidth = 0.6;
+      ctx.stroke();
+    }
+
+    // Draw glowing ring at the equator/base
+    const ringTilt = tiltX;
+    const ringSegments = 100;
+    const ringRadius = radius * 1.15;
+
+    // Outer ring — draw segments with gradient from teal to pink
+    for (let i = 0; i < ringSegments; i++) {
+      const angle1 = (i / ringSegments) * Math.PI * 2;
+      const angle2 = ((i + 1) / ringSegments) * Math.PI * 2;
+
+      const x1 = ringRadius * Math.cos(angle1), z1 = ringRadius * Math.sin(angle1);
+      const x2 = ringRadius * Math.cos(angle2), z2 = ringRadius * Math.sin(angle2);
+
+      const ra1 = rotateY(x1, 0, z1, rotY * 0.5);
+      const rb1 = rotateX(ra1.x, ra1.y, ra1.z, ringTilt);
+      const p1 = project(rb1.x, rb1.y, rb1.z, cx, cy, radius);
+
+      const ra2 = rotateY(x2, 0, z2, rotY * 0.5);
+      const rb2 = rotateX(ra2.x, ra2.y, ra2.z, ringTilt);
+      const p2 = project(rb2.x, rb2.y, rb2.z, cx, cy, radius);
+
+      // Interpolate color from teal → pink around the ring
+      const t = i / ringSegments;
+      const r = Math.round(65 + (238 - 65) * Math.sin(t * Math.PI));
+      const g = Math.round(182 + (115 - 182) * Math.sin(t * Math.PI));
+      const b = Math.round(161 + (160 - 161) * Math.sin(t * Math.PI));
+
+      ctx.beginPath();
+      ctx.moveTo(p1.x, p1.y);
+      ctx.lineTo(p2.x, p2.y);
+      ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.4)`;
+      ctx.lineWidth = 2;
+      ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.6)`;
+      ctx.shadowBlur = 15;
+      ctx.stroke();
+    }
+    ctx.shadowBlur = 0;
+
+    // Inner ring — pink tint
+    ctx.beginPath();
+    const innerRingRadius = radius * 1.05;
+    for (let i = 0; i <= ringSegments; i++) {
+      const angle = (i / ringSegments) * Math.PI * 2;
+      const x0 = innerRingRadius * Math.cos(angle);
+      const y0 = 0;
+      const z0 = innerRingRadius * Math.sin(angle);
+
+      const r1 = rotateY(x0, y0, z0, rotY * 0.5);
+      const r2 = rotateX(r1.x, r1.y, r1.z, ringTilt);
+      const p = project(r2.x, r2.y, r2.z, cx, cy, radius);
+
+      if (i === 0) ctx.moveTo(p.x, p.y);
+      else ctx.lineTo(p.x, p.y);
+    }
+    ctx.strokeStyle = "rgba(238, 115, 143, 0.15)";
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // Floating particles on the globe surface
+    particles.forEach((p) => {
+      p.lon += p.speed;
+      const x0 = radius * 1.02 * Math.cos(p.lat) * Math.cos(p.lon);
+      const y0 = radius * 1.02 * Math.sin(p.lat);
+      const z0 = radius * 1.02 * Math.cos(p.lat) * Math.sin(p.lon);
+
+      const r1 = rotateY(x0, y0, z0, rotY);
+      const r2 = rotateX(r1.x, r1.y, r1.z, tiltX);
+      const proj = project(r2.x, r2.y, r2.z, cx, cy, radius);
+
+      // Only draw particles on the front face
+      if (r2.z < radius * 0.3) {
+        const pulse = 0.5 + 0.5 * Math.sin(time * 3 + p.phase);
+        const alpha = (0.4 + 0.4 * pulse) * proj.scale;
+        ctx.beginPath();
+        ctx.arc(proj.x, proj.y, p.size * proj.scale, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(65, 182, 161, ${alpha})`;
+        ctx.shadowColor = "rgba(65, 182, 161, 0.8)";
+        ctx.shadowBlur = 8;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+    });
+
+    // Ring orbit particles — alternate between teal and pink
+    ringParticles.forEach((rp, idx) => {
+      rp.angle += rp.speed;
+      const rpRadius = ringRadius * rp.dist;
+      const x0 = rpRadius * Math.cos(rp.angle);
+      const y0 = 0;
+      const z0 = rpRadius * Math.sin(rp.angle);
+
+      const r1 = rotateY(x0, y0, z0, rotY * 0.5);
+      const r2 = rotateX(r1.x, r1.y, r1.z, ringTilt);
+      const proj = project(r2.x, r2.y, r2.z, cx, cy, radius);
+
+      const alpha = 0.5 * proj.scale;
+      const isPink = idx % 3 === 0;
+      const color = isPink ? `rgba(238, 115, 143, ${alpha})` : `rgba(65, 182, 161, ${alpha})`;
+      const glowColor = isPink ? "rgba(238, 115, 143, 0.6)" : "rgba(65, 182, 161, 0.6)";
+      ctx.beginPath();
+      ctx.arc(proj.x, proj.y, rp.size * proj.scale, 0, Math.PI * 2);
+      ctx.fillStyle = color;
+      ctx.shadowColor = glowColor;
+      ctx.shadowBlur = 6;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    });
+
+    // Draw connection lines between nearby particles
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const p1 = particles[i];
+        const p2 = particles[j];
+        const dLat = p1.lat - p2.lat;
+        const dLon = p1.lon - p2.lon;
+        const dist = Math.sqrt(dLat * dLat + dLon * dLon);
+
+        if (dist < 0.8) {
+          const x1 = radius * 1.02 * Math.cos(p1.lat) * Math.cos(p1.lon);
+          const y1 = radius * 1.02 * Math.sin(p1.lat);
+          const z1 = radius * 1.02 * Math.cos(p1.lat) * Math.sin(p1.lon);
+          const r1a = rotateY(x1, y1, z1, rotY);
+          const r1b = rotateX(r1a.x, r1a.y, r1a.z, tiltX);
+
+          const x2 = radius * 1.02 * Math.cos(p2.lat) * Math.cos(p2.lon);
+          const y2 = radius * 1.02 * Math.sin(p2.lat);
+          const z2 = radius * 1.02 * Math.cos(p2.lat) * Math.sin(p2.lon);
+          const r2a = rotateY(x2, y2, z2, rotY);
+          const r2b = rotateX(r2a.x, r2a.y, r2a.z, tiltX);
+
+          if (r1b.z < radius * 0.3 && r2b.z < radius * 0.3) {
+            const proj1 = project(r1b.x, r1b.y, r1b.z, cx, cy, radius);
+            const proj2 = project(r2b.x, r2b.y, r2b.z, cx, cy, radius);
+            const lineAlpha = (1 - dist / 0.8) * 0.15;
+
+            ctx.beginPath();
+            ctx.moveTo(proj1.x, proj1.y);
+            ctx.lineTo(proj2.x, proj2.y);
+            ctx.strokeStyle = `rgba(65, 182, 161, ${lineAlpha})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    animationId = requestAnimationFrame(drawGlobe);
+  }
+
+  // Start animation
+  drawGlobe();
+
+  // Cleanup on navigation
+  document.addEventListener("astro:before-swap", () => {
+    cancelAnimationFrame(animationId);
+  });
+
+  // Respect reduced motion
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  if (prefersReducedMotion.matches) {
+    cancelAnimationFrame(animationId);
+    // Draw a single static frame
+    drawGlobe();
+    cancelAnimationFrame(animationId);
+  }
+</script>

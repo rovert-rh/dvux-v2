@@ -1,0 +1,131 @@
+---
+interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props;
+
+const plans = [
+  {
+    name: "Starter",
+    price: 150,
+    description: "Ideal para freelancers que necesitan presencia web rapida.",
+    features: [
+      "Landing page 1 pagina",
+      "Copy basico",
+      "Diseno responsive",
+      "Entrega en 7 dias",
+      "1 ronda de revision",
+    ],
+    cta: "Empezar ahora",
+    highlighted: false,
+  },
+  {
+    name: "Pro",
+    price: 300,
+    description: "Para creativos que quieren una landing que realmente convierta.",
+    features: [
+      "Landing + 2 paginas internas",
+      "Copy profesional persuasivo",
+      "Diseno premium personalizado",
+      "Entrega en 10 dias",
+      "2 rondas de revision",
+      "SEO basico configurado",
+    ],
+    cta: "Elegir Pro",
+    highlighted: true,
+    badge: "Recomendado",
+  },
+  {
+    name: "Scale",
+    price: 500,
+    description: "Sitio completo para escalar tu negocio freelance.",
+    features: [
+      "Landing + sitio completo",
+      "Copy + SEO avanzado",
+      "Diseno premium + animaciones",
+      "Entrega en 15 dias",
+      "3 rondas de revision",
+      "Soporte 30 dias post-entrega",
+    ],
+    cta: "Contactar",
+    highlighted: false,
+  },
+];
+---
+
+<section id={id} class="relative py-24 md:py-32 overflow-hidden">
+  <div class="glow-teal" style="top: -100px; right: -200px; opacity: 0.4;"></div>
+  <div class="glow-pink" style="bottom: -100px; left: -150px; opacity: 0.4;"></div>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16 reveal">
+      <span class="text-[#41B6A1] text-sm font-semibold tracking-wider uppercase mb-4 block">
+        Precios
+      </span>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
+        Precio fijo. <span class="text-[#41B6A1]">Sin sorpresas.</span>
+      </h2>
+      <p class="text-[#A1A1AA] text-lg max-w-2xl mx-auto">
+        Elige el plan que mejor se ajuste a lo que necesitas. Todos incluyen diseno y copy.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+      {plans.map((plan, i) => (
+        <div
+          class:list={[
+            "relative flex flex-col p-8 rounded-xl reveal",
+            plan.highlighted
+              ? "bg-[#13151a] border-2 border-[#41B6A1]/40 shadow-[0_0_40px_rgba(65,182,161,0.12)]"
+              : "glass-card",
+          ]}
+          style={`transition-delay: ${i * 100}ms;`}
+        >
+          {plan.badge && (
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+              <span class="bg-[#41B6A1] text-[#0a0b10] text-xs font-bold px-4 py-1.5 rounded-full">
+                {plan.badge}
+              </span>
+            </div>
+          )}
+
+          <div class="mb-6">
+            <h3 class="text-[#F4F4F5] text-xl font-bold mb-2">{plan.name}</h3>
+            <p class="text-[#71717A] text-sm">{plan.description}</p>
+          </div>
+
+          <div class="mb-8">
+            <span class="text-4xl md:text-5xl font-bold text-[#F4F4F5]">${plan.price}</span>
+            <span class="text-[#71717A] text-sm ml-1">USD</span>
+          </div>
+
+          <ul class="flex-grow space-y-3 mb-8">
+            {plan.features.map((feature) => (
+              <li class="flex items-start gap-3 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#41B6A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span class="text-[#A1A1AA]">{feature}</span>
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href="#contacto"
+            class:list={[
+              "text-center font-semibold py-3.5 px-6 rounded-lg transition-all text-base",
+              plan.highlighted
+                ? "bg-[#41B6A1] text-[#0a0b10] hover:bg-[#34927b] btn-glow"
+                : "border border-white/10 text-[#F4F4F5] hover:border-[#41B6A1]/30 hover:bg-white/[0.02]",
+            ]}
+          >
+            {plan.cta}
+          </a>
+        </div>
+      ))}
+    </div>
+
+    <p class="text-center text-[#52525B] text-sm mt-8 reveal" style="transition-delay: 300ms;">
+      Todos los precios en USD. Pago unico, sin suscripciones ocultas.
+    </p>
+  </div>
+</section>

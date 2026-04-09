@@ -1,26 +1,51 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
-import Home from "../components/Home.astro";
-import Welcome from "../components/Welcome.astro";
+import HeroNew from "../components/HeroNew.astro";
+import ProblemSection from "../components/ProblemSection.astro";
+import SolutionSection from "../components/SolutionSection.astro";
+import ProcessSteps from "../components/ProcessSteps.astro";
+import Stats from "../components/Stats.astro";
 import Projects from "../components/Projects.astro";
-import TextCarousel from "../components/TextCarousel.astro";
-import Team from "../components/Team.astro";
+import Testimonials from "../components/Testimonials.astro";
+import PricingTable from "../components/PricingTable.astro";
+import FAQ from "../components/FAQ.astro";
+import CTAFinal from "../components/CTAFinal.astro";
 import Contact from "../components/Contact.astro";
 import Footer from "../components/Footer.astro";
-import Desing from "../components/Desing.astro";
 ---
 
-<Layout title="Dvux">
+<Layout title="DVUX | Landings que convierten para freelancers" description="Ayudamos a freelancers y creativos a conseguir clientes con landings profesionales en 7 dias. Diseno + copy + desarrollo. Agenda tu llamada gratis.">
 	<main>
 		<Navbar />
-		<Home id="inicio" title="AGENCIA" subtitle="CREATIVA" />
-		<Welcome id="servicios"/>
-		<Projects id="proyectos"/>
-		<Desing id="desing" />
-		<TextCarousel />
-		<Team id="quienes-somos"/>
-		<Contact id="contacto"/>
+		<HeroNew id="inicio" />
+		<ProblemSection id="problema" />
+		<SolutionSection id="servicios" />
+		<ProcessSteps id="proceso" />
+		<Stats />
+		<Projects id="portafolio" />
+		<Testimonials id="testimonios" />
+		<PricingTable id="precios" />
+		<FAQ id="faq" />
+		<CTAFinal />
+		<Contact id="contacto" />
 		<Footer />
 	</main>
 </Layout>
+
+<script>
+	// Scroll reveal observer
+	const reveals = document.querySelectorAll(".reveal");
+	const observer = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add("visible");
+				}
+			});
+		},
+		{ threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+	);
+
+	reveals.forEach((el) => observer.observe(el));
+</script>

@@ -1,16 +1,35 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
-import Home from "../components/Home.astro";
 import Footer from "../components/Footer.astro";
 import MainContent from "../components/MainContent.astro";
 ---
 
-<Layout title="Prompt">
-    <main>
-        <Navbar />
-        <Home id="inicio" title="PROMPTS" subtitle="DVUX" />
-        <MainContent />
-        <Footer />
-    </main>
+<Layout title="Prompts | DVUX - Biblioteca de prompts para creativos" description="Coleccion de prompts de IA listos para usar. Copia, pega y genera contenido profesional al instante. Gratis.">
+  <main>
+    <Navbar />
+
+    <!-- Hero prompts -->
+    <section class="relative pt-32 pb-16 md:pt-40 md:pb-20 overflow-hidden bg-dot-pattern">
+      <div class="glow-pink" style="top: -150px; right: -100px; opacity: 0.25;"></div>
+
+      <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+        <span class="text-[#EE738F] text-sm font-semibold tracking-wider uppercase mb-4 block">
+          Biblioteca de Prompts
+        </span>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
+          Prompts para <span class="text-[#EE738F]">crear con IA</span>
+        </h1>
+        <p class="text-[#A1A1AA] text-lg md:text-xl max-w-2xl mx-auto">
+          Explora nuestra coleccion de prompts listos para usar.
+          Copia, pega y genera contenido profesional al instante.
+        </p>
+      </div>
+
+      <div class="gradient-line max-w-3xl mx-auto mt-16"></div>
+    </section>
+
+    <MainContent />
+    <Footer />
+  </main>
 </Layout>
