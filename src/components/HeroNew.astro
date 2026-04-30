@@ -141,7 +141,7 @@ const { id } = Astro.props;
   const ctx = canvas.getContext("2d")!;
 
   let width: number, height: number, dpr: number;
-  let animationId: number;
+  let animationId: number | null = null;
 
   function resize() {
     dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -530,7 +530,9 @@ const { id } = Astro.props;
 
   // Cleanup on navigation
   document.addEventListener("astro:before-swap", () => {
-    cancelAnimationFrame(animationId);
+    if (animationId !== null) {
+      cancelAnimationFrame(animationId);
+    }
   });
 
   // Respect reduced motion
@@ -538,9 +540,12 @@ const { id } = Astro.props;
     "(prefers-reduced-motion: reduce)",
   );
   if (prefersReducedMotion.matches) {
-    cancelAnimationFrame(animationId);
-    // Draw a single static frame
+    if (animationId !== null) {
+      cancelAnimationFrame(animationId);
+    }
     drawGlobe();
-    cancelAnimationFrame(animationId);
+    if (animationId !== null) {
+      cancelAnimationFrame(animationId);
+    }
   }
 </script>
