@@ -8,19 +8,19 @@ const { id } = Astro.props;
 const problems = [
   {
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
-    text: "Pasas horas en redes pero no cierras proyectos",
+    text: "Recibes visitas pero nadie te contacta",
   },
   {
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
-    text: "Tu portafolio esta perdido entre miles en Behance",
+    text: "Tu página no explica bien lo que haces",
   },
   {
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
-    text: 'Los clientes te piden "tu pagina web" y no tienes',
+    text: "No tienes una estructura pensada para vender",
   },
   {
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
-    text: "Intentaste hacerla tu, pero nunca la terminas",
+    text: "Dependes de redes y no de un sistema",
   },
 ];
 ---
@@ -28,12 +28,14 @@ const problems = [
 <section id={id} class="relative py-24 md:py-32 overflow-hidden">
   <div class="max-w-5xl mx-auto px-6">
     <div class="text-center mb-16 reveal">
-      <span class="text-[#EE738F] text-sm font-semibold tracking-wider uppercase mb-4 block">
+      <span
+        class="text-[#EE738F] text-sm font-semibold tracking-wider uppercase mb-4 block"
+      >
         El problema
       </span>
       <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
-        Tienes el talento, pero
-        <span class="text-[#EE738F]">no los clientes?</span>
+        Tienes un buen servicio…
+        <span class="text-[#EE738F]">pero tu web no está convirtiendo</span>
       </h2>
       <p class="text-[#A1A1AA] text-lg max-w-2xl mx-auto">
         Si eres freelancer o creativo, probablemente te identificas con esto:
@@ -41,24 +43,26 @@ const problems = [
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-      {problems.map((problem, i) => (
-        <div
-          class="glass-card p-6 flex items-start gap-4 reveal"
-          style={`transition-delay: ${i * 100}ms;`}
-        >
-          <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-[#EE738F]/10 flex items-center justify-center text-[#EE738F]">
-            <Fragment set:html={problem.icon} />
+      {
+        problems.map((problem, i) => (
+          <div
+            class="glass-card p-6 flex items-start gap-4 reveal"
+            style={`transition-delay: ${i * 100}ms;`}
+          >
+            <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-[#EE738F]/10 flex items-center justify-center text-[#EE738F]">
+              <Fragment set:html={problem.icon} />
+            </div>
+            <p class="text-[#F4F4F5] text-base md:text-lg leading-relaxed">
+              {problem.text}
+            </p>
           </div>
-          <p class="text-[#F4F4F5] text-base md:text-lg leading-relaxed">
-            {problem.text}
-          </p>
-        </div>
-      ))}
+        ))
+      }
     </div>
 
     <div class="text-center mt-12 reveal" style="transition-delay: 400ms;">
       <p class="text-[#71717A] text-base italic">
-        "Sabes que tu trabajo es bueno... pero nadie te encuentra."
+        "No necesitas más tráfico. Necesitas una landing que convierta."
       </p>
     </div>
   </div>

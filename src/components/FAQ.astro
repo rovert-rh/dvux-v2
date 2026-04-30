@@ -7,28 +7,44 @@ const { id } = Astro.props;
 
 const faqs = [
   {
-    question: "Que necesito para empezar?",
-    answer: "Solo una llamada de 15 minutos. Ahi entendemos tu negocio, tu audiencia y que quieres lograr. Nosotros nos encargamos del resto.",
+    question: "¿Qué necesito para empezar?",
+    answer:
+      "Solo una llamada de 15 minutos. Ahí entendemos tu negocio, a quién le vendes y qué objetivo quieres lograr. No necesitas tener nada listo: nosotros te guiamos en todo el proceso y nos encargamos de la parte técnica y creativa.",
   },
   {
-    question: "Puedo ver un avance antes de pagar todo?",
-    answer: "Si. Trabajamos con un anticipo del 50% para iniciar. Te mostramos el diseno antes de desarrollar, y solo avanzamos cuando apruebes.",
+    question: "¿Puedo ver un avance antes de pagar todo?",
+    answer:
+      "Sí. Trabajamos con un anticipo del 50% para iniciar. Primero te mostramos el diseño y la estructura de la landing, y solo avanzamos al desarrollo cuando lo apruebes. Así tienes control total antes de continuar.",
   },
   {
-    question: "Que pasa si no me gusta el diseno?",
-    answer: "Para eso estan las rondas de revision. Ajustamos colores, estructura, textos... lo que necesites hasta que quede como lo imaginas.",
+    question: "¿Qué pasa si no me gusta el diseño?",
+    answer:
+      "No te quedas con algo que no te convenza. Incluimos rondas de revisión donde ajustamos diseño, estructura y textos hasta que la landing refleje lo que buscas. Nuestro objetivo es que te sientas seguro al lanzarla.",
   },
   {
-    question: "Incluye hosting y dominio?",
-    answer: "El diseno y desarrollo estan incluidos. Hosting y dominio son servicios externos que te ayudamos a configurar (muchos son gratuitos).",
+    question: "¿Incluye hosting y dominio?",
+    answer:
+      "El diseño y desarrollo están incluidos. El hosting y dominio son servicios externos, pero te ayudamos a elegirlos y configurarlos paso a paso. Incluso podemos recomendarte opciones económicas o gratuitas para empezar.",
   },
   {
-    question: "Puedo modificar la landing despues?",
-    answer: "Si. Tu landing es tuya. Te entregamos el codigo completo y puedes editarlo cuando quieras. Si necesitas ayuda, estamos disponibles.",
+    question: "¿Puedo modificar la landing después?",
+    answer:
+      "Sí. La landing es completamente tuya. Te entregamos todo listo para que puedas editarla cuando quieras. Y si prefieres no complicarte, también podemos ayudarte con futuras mejoras.",
   },
   {
-    question: "En cuanto tiempo empiezo a ver resultados?",
-    answer: "Desde el dia 1 que tu landing este online. Pero los mejores resultados vienen cuando la combinas con una estrategia de contenido o ads.",
+    question: "¿En cuánto tiempo empiezo a ver resultados?",
+    answer:
+      "Desde que tu landing está online puedes empezar a recibir contactos. Sin embargo, los mejores resultados llegan cuando la combinas con tráfico (redes, anuncios o contactos directos). Nosotros te dejamos una base optimizada para convertir.",
+  },
+  {
+    question: "¿Para quién es este servicio?",
+    answer:
+      "Es ideal para freelancers, coaches y negocios que quieren conseguir clientes online pero no tienen una landing optimizada. Si ya tienes tráfico pero no conviertes, esto es para ti.",
+  },
+  {
+    question: "¿Cuántos proyectos toman por semana?",
+    answer:
+      "Trabajamos con un número limitado de proyectos para asegurar calidad y tiempos de entrega. Por eso te recomendamos reservar tu lugar lo antes posible.",
   },
 ];
 ---
@@ -36,7 +52,9 @@ const faqs = [
 <section id={id} class="relative py-24 md:py-32 overflow-hidden">
   <div class="max-w-3xl mx-auto px-6">
     <div class="text-center mb-16 reveal">
-      <span class="text-[#41B6A1] text-sm font-semibold tracking-wider uppercase mb-4 block">
+      <span
+        class="text-[#41B6A1] text-sm font-semibold tracking-wider uppercase mb-4 block"
+      >
         Preguntas frecuentes
       </span>
       <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
@@ -45,37 +63,41 @@ const faqs = [
     </div>
 
     <div class="space-y-3">
-      {faqs.map((faq, i) => (
-        <div
-          class="glass-card overflow-hidden reveal"
-          style={`transition-delay: ${i * 80}ms;`}
-        >
-          <button
-            class="faq-toggle w-full flex items-center justify-between p-5 text-left cursor-pointer"
-            aria-expanded="false"
+      {
+        faqs.map((faq, i) => (
+          <div
+            class="glass-card overflow-hidden reveal"
+            style={`transition-delay: ${i * 80}ms;`}
           >
-            <span class="text-[#F4F4F5] font-medium text-base pr-4">{faq.question}</span>
-            <svg
-              class="faq-icon flex-shrink-0 w-5 h-5 text-[#41B6A1] transition-transform duration-300"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+            <button
+              class="faq-toggle w-full flex items-center justify-between p-5 text-left cursor-pointer"
+              aria-expanded="false"
             >
-              <line x1="12" y1="5" x2="12" y2="19" />
-              <line x1="5" y1="12" x2="19" y2="12" />
-            </svg>
-          </button>
-          <div class="faq-content max-h-0 overflow-hidden transition-all duration-300">
-            <p class="px-5 pb-5 text-[#A1A1AA] text-sm leading-relaxed">
-              {faq.answer}
-            </p>
+              <span class="text-[#F4F4F5] font-medium text-base pr-4">
+                {faq.question}
+              </span>
+              <svg
+                class="faq-icon flex-shrink-0 w-5 h-5 text-[#41B6A1] transition-transform duration-300"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+            </button>
+            <div class="faq-content max-h-0 overflow-hidden transition-all duration-300">
+              <p class="px-5 pb-5 text-[#A1A1AA] text-sm leading-relaxed">
+                {faq.answer}
+              </p>
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
   </div>
 </section>
